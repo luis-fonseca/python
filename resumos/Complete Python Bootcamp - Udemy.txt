@@ -1,0 +1,4 @@
+Lista de diferenças entre Python2 e 3
+Python 2 foi lançado em 2000 e o Python 2.7 na metade do ano em 2010. Perderá o suporte em 2020.
+
+Python 3 foi lançado em 2008 e muitas bibliotecas começaram a dar suporte para ele, mas não todas.
