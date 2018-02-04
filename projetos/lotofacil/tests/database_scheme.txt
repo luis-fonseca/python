@@ -1,0 +1,13 @@
+draws (sorteios)
+ - draw       - numero do sorteio
+ - date       - data do sorteio
+ - numbers    - numeros do sorteio
+
+statistics
+ - total_odds_numbers - total de números pares
+ - total_even_numbers - total de números ímpares
+ - most_drawn_number  - numero mais sorteado
+ - less_drawn_number  - numero menos sorteado
+ - most_drawn_numbers - numeros mais sorteados (5)
+ - less_drawn_numbers - numeros menos sorteados (5)
+
