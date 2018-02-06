@@ -4,7 +4,7 @@ import sqlite3
 import os
 #import results
 
-database_dir = "draws"
+database_dir = "db"
 database_name = "draws.db"
 relative_path = os.path.join(database_dir, database_name)
 
@@ -25,24 +25,32 @@ def create_database():
 
     if not os.path.exists(database_dir):
         os.mkdir(database_dir)
+    else:
+        try:
+            os.remove(relative_path)
+        except PermissionError as permission:
+            msg = "Não foi possível remover o arquivo de banco de dados. "
+            msg += "Arquivo em uso."
 
-    conn = sqlite3.connect(relative_path)
+            print(msg)
+            exit()
 
-    return conn
+    return connect_in_database(relative_path)
 
 
 def create_tables(conn):
     """Cria as tabelas de sorteios e estatísticas."""
 
-    sql_draws = """CREATE TABLE IF NOT EXISTS draws (draw_number text, draw_date text,
-            numbers text)"""
+    sql_draws = """CREATE TABLE IF NOT EXISTS draws (draw integer, draw_date varchar(10),
+            draw_numbers varchar(50))"""
+
     sql_statistics = """CREATE TABLE IF NOT EXISTS statistics (
         total_even_numbers INTEGER,
         total_odd_numbers INTEGER,
         most_drawn_number INTEGER,
         less_drawn_number INTEGER,
-        most_drawn_numbers VARCHAR(100),
-        less_drawn_numbers VARCHAR(100))"""
+        most_drawn_numbers VARCHAR(25),
+        less_drawn_numbers VARCHAR(25))"""
 
     cursor = conn.execute(sql_draws)
     cursor = conn.execute(sql_statistics)
@@ -60,7 +68,6 @@ def table_exists(name):
     sql = "SELECT name FROM sqlite_master WHERE type='table' "
     sql += "and name='{0}'".format(name)
 
-    print(sql)
     if database_exists(relative_path):
         conn = sqlite3.connect(relative_path)
         cursor = conn.execute(sql)
@@ -70,3 +77,28 @@ def table_exists(name):
 
     return False
 
+
+def connect_in_database(path):
+    """Se conecta ao um banco de dados"""
+
+    print("Conectando ao banco de dados ...")
+    conn = sqlite3.connect(path)
+    return conn
+
+
+def insert_rows_in_table(sql):
+    """Insere os registros em uma tabela."""
+
+    try:
+        conn = connect_in_database(relative_path)
+
+        print("Salvando os resultados no banco de dados. Talvez demore um pouco ...")
+        cursor = conn.cursor()
+        cursor.execute(sql)
+
+        print("Dados salvos ...")
+        conn.commit()
+    except sqlite3.OperationalError as error:
+        msg = "Não foi possível inserir os registros. Banco de dados bloqueado por outro processo. \n"
+        msg += "Nada feito."
+        print(msg)
