@@ -1,0 +1,33 @@
+4 questões básicas para programação GUI
+
+- Especificar como a GUI deve parecer, ou seja, definir o que o usuário verá na tela;
+- Decidir o que a UI faça, ou seja, escrever procedimentos para satisfazer as necessidades do programa;
+- Associar o parecer com o fazer. Escrever código para associar as coisas que o usuário vê na tela com os procedimentos escritos para desempenhar os papéis requeridos pelo programa;
+- Escrever código que aguarde as decisões do usuário
+
+Jargões
+
+- Widget: elementos/componentes de interface gráfica com o usuário;
+- Container: é onde podem ser dispostos os widgets. Existem diversos tipos como o Frame, Canvas, entre outros;
+- Event handlers: são funções que executam as tarefas da GUI;
+- Events: são formas de entrada de dados, tais como clique do mouse ou pressionamento de uma tecla;
+- Handlers: São procedimentos que alimentam ou respondem aos eventos;
+- Binding: É a associação de um event handler a um widget. O binding envolve a associação entre 3 coisas diferentes: um tipo de evento, um widget e um procedimento event handler;
+- Event Loop: É o código que espera os eventos ocorrerem.
+
+Para se criar um container basta,
+
+meuMestre = Tk()
+meuContainer = Frame(meuMestre)
+meuContainer.pack()
+
+onde criará um container do tipo Frame com o nome meuContainer que estará subordinado ao meuMestre. A relação é puramente lógica e serve para otimizar eventos do tipo destrutivo, pois o mestre sabe quem são seus escravos e pode destruí-los, antes de se destruir.
+
+meuContainer.pack() define o gerenciador de geometria no qual é necessário para se mostrar as relações visuais entre os componentes GUI e seus mestres. Quando não definido nada será mostrado.
+
+Um gerenciador de geometria é, em sua essência, uma API. Uma forma de dizer ao Tkinter como quer que os containeres se apresentem visualmente. Existem 3 gerenciadores: pack, grid e place.
+
+O esquema básico funciona dessa forma:
+- cria-se uma instância da classe ou container;
+- associa a instância ao mestre;
+- define um gerenciador de geometria para administrar a instância.

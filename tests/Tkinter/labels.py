@@ -1,6 +1,6 @@
-#!/bin/python3.5
+#!/bin/python3
 
-import tkinter as tk
+import Tkinter as tk
 
 root = tk.Tk()
 
