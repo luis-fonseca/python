@@ -21,9 +21,9 @@ meuMestre = Tk()
 meuContainer = Frame(meuMestre)
 meuContainer.pack()
 
-onde criará um container do tipo Frame com o nome meuContainer que estará subordinado ao meuMestre. A relação é puramente lógica e serve para otimizar eventos do tipo destrutivo, pois o mestre sabe quem são seus escravos e pode destruí-los, antes de se destruir.
+onde criará um container do tipo Frame com o nome meuContainer que estará subordinado ao meuMestre, a raiz da aplicação. A relação é puramente lógica e serve para otimizar eventos do tipo destrutivo, pois o mestre sabe quem são seus escravos e pode destruí-los, antes de se destruir.
 
-meuContainer.pack() define o gerenciador de geometria no qual é necessário para se mostrar as relações visuais entre os componentes GUI e seus mestres. Quando não definido nada será mostrado.
+meuContainer.pack() define o gerenciador de geometria no qual é necessário para se mostrar as relações visuais, ou administrar, entre os componentes GUI e seus mestres. Quando não definido, nada será mostrado.
 
 Um gerenciador de geometria é, em sua essência, uma API. Uma forma de dizer ao Tkinter como quer que os containeres se apresentem visualmente. Existem 3 gerenciadores: pack, grid e place.
 
@@ -31,3 +31,20 @@ O esquema básico funciona dessa forma:
 - cria-se uma instância da classe ou container;
 - associa a instância ao mestre;
 - define um gerenciador de geometria para administrar a instância.
+
+Frames
+É basicamente um container. O interior dele é chamado de cavidade e ela é extensível, ou elástica, como uma borracha. Se não for especificado uma tamanho máximo ou mínimo essa cavidade será esticada ou comprimida até conseguir acomodar qualquer coisa dentro do frame.
+
+Nesse programa, 
+
+#!/bin/python3
+import tkinter as tk
+
+root = tk.Tk()
+
+frame1 = tk.Frame(root)
+frame1.pack() #1
+
+root.mainloop()
+
+se removessemos #1 a raiz seria mostrada em seu tamanho padrão, porém, ao mante-la e tendo definido o gerenciador de geometria sem qualquer widget ou um tamanho para o frame, então a cavidade do root se encolhe até o limite.
